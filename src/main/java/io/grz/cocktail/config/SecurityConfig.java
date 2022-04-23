@@ -1,12 +1,16 @@
 package io.grz.cocktail.config;
 
+import io.grz.cocktail.config.filter.DebugFilter;
 import io.grz.cocktail.config.jwt.JWTAuthenticationFIlter;
+import io.grz.cocktail.config.jwt.JWTAuthorizationFilter;
+import io.grz.cocktail.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
@@ -15,10 +19,11 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CorsFilter corsFilter;
+    private final UserRepository userRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.addFilterAfter(new DebugFilter(), FilterSecurityInterceptor.class);
+        http.addFilterBefore(new DebugFilter(), SecurityContextPersistenceFilter.class);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable()
@@ -26,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .addFilter(new JWTAuthenticationFIlter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), userRepository))
 
                 .authorizeRequests()
                     .antMatchers("/user/**").authenticated()

@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.grz.cocktail.config.auth.PrincipalDetails;
 import io.grz.cocktail.model.user.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
+@Slf4j
 @RequiredArgsConstructor
 public class JWTAuthenticationFIlter extends UsernamePasswordAuthenticationFilter{
 
@@ -40,7 +43,11 @@ public class JWTAuthenticationFIlter extends UsernamePasswordAuthenticationFilte
             // 3. 반환 시 authentication 객체를 세션에 담음 -> JWT는 세션을 만들 이유가 없지만 시큐리티가 제공하는 사용자의 권한 관리를 위해 만듬
             return authentication;
         } catch (IOException e) {
-            e.printStackTrace();
+            log.info("JWTAuthenticationFIlter.attemptAuthentication()   : "+e.getCause());
+            return null;
+        } catch (NullPointerException e) {
+            log.info("JWTAuthenticationFIlter.attemptAuthentication()   : Failed to Authenticate user["+e.getCause()+"]");
+            try {response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "해당 사용자의 가입 기록이 없습니다");} catch(IOException io){io.printStackTrace();}
             return null;
         }
     }
@@ -59,5 +66,6 @@ public class JWTAuthenticationFIlter extends UsernamePasswordAuthenticationFilte
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         response.addHeader("Authorization", "Bearer "+jwtToken);
+        response.setStatus(HttpStatus.OK.value());
     }
 }

@@ -21,18 +21,18 @@ let index = {
             url : "/login",   // user 테이블 사용할꺼
             data : JSON.stringify(data),  // http body 데이터
             contentType : "application/json; charset=utf-8", // body 데이터가 어떤 타입인지
-        }).done(function(response){
-            console.log(response)
-            if(response.status == 500){
+        }).done(function(data, textStatus, xhr){
+            if(textStatus == "error"){
                 alert("something went wrong");
                 return;
             }
-            if(response == "OK"){
-                location.href = "/";
+            if(textStatus == "success"){
+                token = xhr.getResponseHeader("Authorization")
+                //location.href="/"
             }
         }).fail(function(error){
             if(error.status == 500){
-                alert(error.responseText);
+                alert(JSON.parse(error.responseText).message);
             }
         });
     }

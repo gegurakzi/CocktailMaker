@@ -12,14 +12,11 @@ public class DebugFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-
         //아이디와 패스워드가 정상적으로 들어와서 로그인이 완료되면 토큰을 생성, 응답해준다
 
-        String strreq = req.toString();
-
+        String strreq = req.getHeader("Authentication");
         System.out.println("Debug Filter :" + strreq);
         chain.doFilter(req, res);
     }
