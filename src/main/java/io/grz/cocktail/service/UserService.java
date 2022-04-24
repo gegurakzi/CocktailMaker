@@ -47,7 +47,7 @@ public class UserService {
                 .username(user.getUsername())
                 .accessDate(user.getAccessDate())
                 .cocktailRecipes(user.getCocktailRecipes())
-                .email(user.getEmail())
+                .nickname(user.getNickname())
                 .ingredientRecipes(user.getIngredientRecipes())
                 .postings(user.getPostings())
                 .provider(user.getProvider())

@@ -23,7 +23,7 @@ public class UserDTO {
     private long id;
     private String username;
     private String password;
-    private String email;
+    private String nickname;
     private String role;
     private String provider;
     private String providerId;

@@ -1,6 +1,9 @@
 package io.grz.cocktail.config.filter;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.grz.cocktail.model.user.User;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +19,13 @@ public class DebugFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         //아이디와 패스워드가 정상적으로 들어와서 로그인이 완료되면 토큰을 생성, 응답해준다
 
-        String strreq = req.getHeader("Authentication");
-        System.out.println("Debug Filter :" + strreq);
-        chain.doFilter(req, res);
+        request.getParameter("username");
+        request.getParameter("password");
+
+        System.out.println("======================"+request.getParameter("username") + request.getParameter("password"));
+
+
+        chain.doFilter(request, response);
     }
 
 }

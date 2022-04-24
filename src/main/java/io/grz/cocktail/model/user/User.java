@@ -7,7 +7,9 @@ import io.grz.cocktail.model.article.Recipe.IngredientRecipe;
 import io.grz.cocktail.model.article.Reply.Reply;
 import io.grz.cocktail.model.item.Ingredient.Ingredient;
 import io.grz.cocktail.model.item.Item;
+import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -31,10 +33,11 @@ public class User {
     private String password;
 
     @Column(nullable = false, length=50)
-    private String email;
+    private String nickname;
 
     @Column(nullable = false)
     private String role;
+
     private String provider;
     private String providerId;
 

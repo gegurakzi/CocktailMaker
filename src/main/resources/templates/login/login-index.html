@@ -11,17 +11,28 @@
     <div class="col-lg-2"></div>
     <div class="col-lg-5 px-4 py-5 my-5 text-center bg-light rounded-3" >
         <div class="row justify-content-center">
-            <div style="max-width: 500px">
+            <form action="/login/authenticate" method="POST" style="max-width: 500px">
                 <h1 class="h3 mt-4 mb-5 fw-normal">로그인</h1>
                 <div class="my-2 form-floating">
-                    <input type="text" class="form-control" id="username" placeholder="username">
-                    <label for="username">닉네임</label>
+                    <input type="email" class="form-control" name="username" id="username" placeholder="username">
+                    <label for="username">이메일</label>
                 </div>
                 <div class="my-2 form-floating">
-                    <input type="password" class="form-control" id="password" placeholder="password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="password">
                     <label for="password">비밀번호</label>
                 </div>
-                <button class="my-4 w-100 btn btn-lg btn-primary" id="login">로그인</button>
+                <button type="submit" class="my-4 w-100 btn btn-lg btn-primary">로그인</button>
+                <div class="d-flex my-1 justify-content-center">
+                    <a href="/oauth2/authorization/google" class="d-inline-flex text-muted m-1" >
+                        <img src="/icon/google.svg", style="width: 28px; height: 28px">
+                    </a>
+                    <a href="/oauth2/authorization/facebook" class="d-inline-flex text-muted mx-1" >
+                        <img src="/icon/facebook.svg", style="width: 28px; height: 28px">
+                    </a>
+                    <a href="/oauth2/authorization/naver" class="d-inline-flex text-muted mx-1" >
+                        <img src="/icon/naver.png", style="width: 28px; height: 28px">
+                    </a>
+                </div>
                 <div class="d-flex justify-content-center">
                     <a href="/register" class="text-muted"><small>아직 회원이 아니신가요?</small></a>
                     <p class="mx-1"><small>|</small></p>
@@ -29,7 +40,7 @@
                 </div>
 
                 <p class="mt-5 mb-3 text-muted">© 2022</p>
-            </div>
+            </form>
         </div>
     </div>
     <div class="col-lg-2"></div>
