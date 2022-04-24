@@ -9,9 +9,9 @@ let index = {
         let data={
            username : $("#username").val(),
            password : $("#password").val(),
-           email : $("#email").val()
+           nickname : $("#nickname").val()
         }
-        if(data.username == "" || data.password == "" || data.email == ""){
+        if(!data.username.includes("@", 1) || data.password == "" || data.nickname == ""){
             alert("정보를 다시 확인해주세요");
             return;
         }

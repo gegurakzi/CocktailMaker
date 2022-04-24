@@ -21,7 +21,7 @@ public class RegisterController {
     public ResponseEntity<String> register(@RequestBody User user){
         if(user.getPassword()==null) return new ResponseEntity<>("올바르지 않은 비밀번호입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         boolean result = userService.isUsernameUnique(user.getUsername());
-        if (!result) return new ResponseEntity<>("이미 사용중인 닉네임입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+        if (!result) return new ResponseEntity<>("이미 사용중인 이메일입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         userService.register(user);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
