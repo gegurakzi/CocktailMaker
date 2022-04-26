@@ -48,7 +48,7 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
             userEntity.setUsername(oAuth2UserInfo.getEmail());
             userEntity.setPassword(bCryptPasswordEncoder.encode(UUID.randomUUID().toString()));
             userEntity.setNickname(oAuth2UserInfo.getProvider()+"_"+oAuth2UserInfo.getProviderId());
-            userEntity.setRole("ROLE_USER");
+            userEntity.setRole("USER");
             userEntity.setProvider(oAuth2UserInfo.getProvider());
             userEntity.setProviderId(oAuth2UserInfo.getProviderId());
             System.out.println(userEntity);

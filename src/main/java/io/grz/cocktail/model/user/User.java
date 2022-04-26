@@ -9,6 +9,7 @@ import io.grz.cocktail.model.item.Ingredient.Ingredient;
 import io.grz.cocktail.model.item.Item;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -26,7 +27,7 @@ public class User {
     @Column(name = "USER_ID")
     private long id;
 
-    @Column(nullable = false, unique = true, length=50)
+    @Column(unique = true, length=50)
     private String username;
 
     @Column(nullable = false, length=75)

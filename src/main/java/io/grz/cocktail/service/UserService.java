@@ -1,6 +1,7 @@
 package io.grz.cocktail.service;
 
 import io.grz.cocktail.config.auth.PrincipalDetails;
+import io.grz.cocktail.dto.UserAuthDTO;
 import io.grz.cocktail.dto.UserDTO;
 import io.grz.cocktail.model.user.User;
 import io.grz.cocktail.repository.UserRepository;
@@ -20,20 +21,18 @@ public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
-    public boolean isUsernameUnique(String username){
-            User user = userRepository.findByUsername(username);
-            if(user == null){
-                return true;
-            } else {
-                return false;
-            }
+    public User findByUsername(String username){
+            return userRepository.findByUsername(username);
     }
 
     @Transactional
-    public void register(User user){
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public User register(UserAuthDTO dto){
+        User user = new User();
+        user.setUsername(dto.getUsername());
+        user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         user.setRole("USER");
-        userRepository.save(user);
+        user.setNickname(dto.getNickname());
+        return userRepository.save(user);
     }
 
     @Transactional
