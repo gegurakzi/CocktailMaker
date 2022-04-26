@@ -26,14 +26,13 @@ public class UserService {
     }
 
     @Transactional
-    public void register(UserAuthDTO dto){
+    public User register(UserAuthDTO dto){
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         user.setRole("USER");
         user.setNickname(dto.getNickname());
-        userRepository.save(user);
-        
+        return userRepository.save(user);
     }
 
     @Transactional
