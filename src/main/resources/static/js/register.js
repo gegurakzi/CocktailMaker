@@ -23,11 +23,6 @@ let index = {
             data : JSON.stringify(data),  // http body 데이터
             contentType : "application/json; charset=utf-8", // body 데이터가 어떤 타입인지
         }).done(function(response){
-            console.log(response)
-            if(response.status == 500){
-                alert("something went wrong");
-                return;
-            }
             if(response == "OK"){
                 alert("회원가입이 완료되었습니다.");
                 location.href = "/";
@@ -35,6 +30,10 @@ let index = {
         }).fail(function(error){
             if(error.status == 500){
                 alert(error.responseText);
+            }
+            if(error.status == 400){
+                alert(Object.values(error.responseJSON)[0]);
+                return;
             }
         });
     }
