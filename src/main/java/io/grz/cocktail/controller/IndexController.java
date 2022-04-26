@@ -11,7 +11,6 @@ import io.grz.cocktail.model.item.Cocktail.Cocktail;
 import io.grz.cocktail.model.item.Ingredient.Ingredient;
 import io.grz.cocktail.model.user.User;
 import io.grz.cocktail.repository.*;
-import io.grz.cocktail.service.ArticleService;
 import io.grz.cocktail.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +31,9 @@ import java.util.List;
 public class IndexController {
 
     private final UserService userService;
-    private final ArticleService articleService;
 
     @GetMapping("/")
     public String index(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
-
-        model.addAttribute("recipe",  articleService.getBestCocktailRecipeListRoughly(10));
-
         if(principalDetails != null){
             model.addAttribute("user", userService.getUserDTOFromPrincipalName(principalDetails.getUsername()));
         }
