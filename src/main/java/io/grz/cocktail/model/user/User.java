@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,7 @@ public class User {
     @Column(name = "USER_ID")
     private long id;
 
-    @Column(nullable = false, unique = true, length=50)
+    @Column(unique = true, length=50)
     private String username;
 
     @Column(nullable = false, length=75)
