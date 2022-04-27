@@ -21,7 +21,6 @@ import java.util.Objects;
 @Aspect
 public class UserBindingAdvice {
 
-
     @Around("execution(* io.grz.cocktail.controller.api..*Controller.*(..))")
     public Object validCheck(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object[] args = proceedingJoinPoint.getArgs();

@@ -4,13 +4,18 @@ import io.grz.cocktail.model.JoinTable.RecipeItem;
 import io.grz.cocktail.model.article.Article;
 import io.grz.cocktail.model.article.Reply.Reply;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
+@EqualsAndHashCode(callSuper = false)
 @Inheritance
 public class Recipe extends Article {
 

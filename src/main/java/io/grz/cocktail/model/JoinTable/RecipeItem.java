@@ -17,11 +17,11 @@ public class RecipeItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ARTICLE_ID")
     private Recipe recipe;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private Item recipeItem;
 

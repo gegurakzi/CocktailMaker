@@ -3,13 +3,16 @@ package io.grz.cocktail.model.article;
 
 import io.grz.cocktail.model.user.User;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.sql.Timestamp;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Article {
 

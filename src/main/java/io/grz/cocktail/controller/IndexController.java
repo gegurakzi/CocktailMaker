@@ -11,8 +11,10 @@ import io.grz.cocktail.model.item.Cocktail.Cocktail;
 import io.grz.cocktail.model.item.Ingredient.Ingredient;
 import io.grz.cocktail.model.user.User;
 import io.grz.cocktail.repository.*;
+import io.grz.cocktail.service.ArticleService;
 import io.grz.cocktail.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,17 +28,22 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class IndexController {
 
     private final UserService userService;
+    private final ArticleService articleService;
 
     @GetMapping("/")
     public String index(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         if(principalDetails != null){
             model.addAttribute("user", userService.getUserDTOFromPrincipalName(principalDetails.getUsername()));
         }
+        List<CocktailRecipe> recipeList = articleService.getAllCocktailRecipe();
+        model.addAttribute("recipeList", recipeList);
+
         return "index";
     }
 

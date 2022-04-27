@@ -7,12 +7,10 @@
 
 <body>
 <header th:insert="~{fragments/header :: navigationBar(${user})}"></header>
+
 <div th:insert="~{fragments/header :: hero}"></div>
 
-
-<div th:insert="~{fragments/index-content :: recipeList}"></div>
-
-
+<div th:insert="~{fragments/index-content :: recipeList(${recipeList})}"></div>
 
 
 

@@ -3,10 +3,13 @@ package io.grz.cocktail.model.article.Recipe;
 import io.grz.cocktail.model.item.Ingredient.Ingredient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Inheritance
