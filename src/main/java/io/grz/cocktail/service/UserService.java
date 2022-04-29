@@ -37,7 +37,6 @@ public class UserService {
 
     @Transactional
     public UserDTO getUserDTOFromPrincipalName(String username){
-        System.out.println(username);
         if(Objects.equals(username, "anonymousUser")) return null;
         User user = userRepository.findByUsername(username);
         if(user == null) return null;
