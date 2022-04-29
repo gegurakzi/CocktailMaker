@@ -2,6 +2,7 @@ package io.grz.cocktail.config;
 
 import io.grz.cocktail.config.filter.DebugFilter;
 import io.grz.cocktail.config.oauth.PrincipalOAuth2UserService;
+import io.grz.cocktail.handler.LoginFailureHandler;
 import io.grz.cocktail.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PrincipalOAuth2UserService principalOAuth2UserService;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -41,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .loginPage("/login")
                         .loginProcessingUrl("/login/authenticate")
                         .defaultSuccessUrl("/")
+                        .failureUrl("/login")
+                        .failureHandler(new LoginFailureHandler())
                 .and()
                     .logout()
                         .logoutSuccessUrl("/")
